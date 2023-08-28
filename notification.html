@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Custom Notification</title>
+    <script src="https://cdn.jsdelivr.net/npm/mudlet@1.0.0/mudlet.min.js"></script>
+    <script>
+        function showNotification(message) {
+            mudlet.Notification.success("Custom Notification", message);
+        }
+
+        window.addEventListener("message", function(event) {
+            if (event.data.action === "showNotification") {
+                showNotification(event.data.message);
+            }
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>
