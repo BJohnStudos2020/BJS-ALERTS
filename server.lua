@@ -14,9 +14,8 @@ local consolemessage =
                   Created by Timmmy#9240
     ]]
 
-
-    local configfile = LoadResourceFile(GetCurrentResourceName(), "./active.json")
-    local extract = json.decode(configfile)
+local configfile = LoadResourceFile(GetCurrentResourceName(), "./active.json")
+local extract = json.decode(configfile)
 
 local aop = "~o~Loading..."
 local cooldowntime = 0
@@ -87,6 +86,7 @@ RegisterCommand('aop', function(source, args, rawCommand)
                 data.priority = active
                 data.pcname = pcplayer
                 data.aop = table.concat(args, " ")
+                extract.aop = table.concat(args, " ")
                 SaveResourceFile(GetCurrentResourceName(), "active.json", json.encode(data), -1)
                 TriggerClientEvent('AOP:update', -1, table.concat(args, " "));
             else
@@ -338,3 +338,9 @@ function local_version()
     end
 end
 
+
+RegisterServerEvent('BJS:Connected')
+AddEventHandler('BJS:Connected', function()
+    print(aop)
+   	TriggerClientEvent('AOP:update', source, aop)
+end)
