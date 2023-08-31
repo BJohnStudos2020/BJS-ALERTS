@@ -301,3 +301,7 @@ RegisterNetEvent('BJS-ALERTS:Notification')
 AddEventHandler('BJS-ALERTS:Notification', function(title, message, time, types)
 	Alert(title, message, time, types)
 end)	
+
+Citizen.CreateThread(function()
+    TriggerServerEvent('BJS:Connected')
+end)
